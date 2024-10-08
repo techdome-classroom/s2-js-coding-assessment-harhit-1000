@@ -19,10 +19,10 @@ var romanToInt = function(s) {
     const current = romanToIntMap[s[i]];
     const next = i + 1 < s.length ? romanToIntMap[s[i + 1]] : 0;
 
-    if (current >= next) {
-      result += current;
-    } else {
+    if (current < next) {
       result -= current;
+    } else {
+      result += current;
     }
   }
 
