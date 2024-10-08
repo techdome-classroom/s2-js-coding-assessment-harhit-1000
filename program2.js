@@ -3,6 +3,8 @@
  * @return {number}
  */
 var romanToInt = function(s) {
+  if (!s) return 0; // Handle empty string
+
   const romanToIntMap = {
     'I': 1,
     'V': 5,
@@ -17,6 +19,10 @@ var romanToInt = function(s) {
   for (let i = 0; i < s.length; i++) {
     const current = romanToIntMap[s[i]];
     const next = romanToIntMap[s[i + 1]];
+
+    if (current === undefined) {
+      throw new Error('Invalid Roman numeral character'); // Handle invalid characters
+    }
 
     if (next && current < next) {
       result -= current;
