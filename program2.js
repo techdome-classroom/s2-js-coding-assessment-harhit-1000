@@ -14,16 +14,18 @@ var romanToInt = function(s) {
   };
 
   let result = 0;
-  for (let i = 0; i < s.length; i++) {
-    const current = romanToIntMap[s[i]];
-    const next = romanToIntMap[s[i + 1]];
+  let prevValue = 0;
 
-    // Check if we need to subtract
-    if (next && current < next) {
-      result -= current;
-    } else {
+  for (let i = s.length - 1; i >= 0; i--) {
+    const current = romanToIntMap[s[i]];
+
+    if (current >= prevValue) {
       result += current;
+    } else {
+      result -= current;
     }
+
+    prevValue = current;
   }
 
   return result;
